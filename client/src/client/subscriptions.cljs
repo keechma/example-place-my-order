@@ -20,7 +20,12 @@
      (when slug
        (edb/get-item-by-id @app-db :restaurants slug)))))
 
+(defn current-order [app-db]
+  (reaction
+   (edb/get-named-item @app-db :orders :current)))
+
 (def all {:states states
           :cities cities
           :restaurants restaurants
-          :current-restaurant current-restaurant})
+          :current-restaurant current-restaurant
+          :current-order current-order})
