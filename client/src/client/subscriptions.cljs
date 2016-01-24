@@ -24,8 +24,13 @@
   (reaction
    (edb/get-named-item @app-db :orders :current)))
 
+(defn order-history [app-db]
+  (reaction
+   (edb/get-collection @app-db :orders :history)))
+
 (def all {:states states
           :cities cities
           :restaurants restaurants
           :current-restaurant current-restaurant
-          :current-order current-order})
+          :current-order current-order
+          :order-history order-history})

@@ -2,11 +2,9 @@
   (:require [ashiba.controller :as controller]
             [client.edb :as edb]
             [cljs-http.client :as http]
+            [client.util :refer [unpack-req]]
             [cljs.core.async :as async :refer [<!]])
   (:require-macros [cljs.core.async.macros :refer [go]]))
-
-(defn unpack-req [req]
-  [(:success req) (:body req)])
 
 (defn remove-order [app-db-atom]
   (reset! app-db-atom

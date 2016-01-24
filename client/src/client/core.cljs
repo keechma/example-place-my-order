@@ -14,7 +14,6 @@
     (if current
       (app-state/stop! current start-app!)
       (start-app!))))
-
  
 (restart-app!)
 

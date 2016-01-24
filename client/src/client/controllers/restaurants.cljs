@@ -6,8 +6,6 @@
             [client.util :refer [unpack-req]])
   (:require-macros [cljs.core.async.macros :refer [go]]))
 
-
-
 (defn load-collection [entity list app-db-atom req]
   (do
     (reset! app-db-atom
@@ -71,7 +69,7 @@
               :select-city (select-city app-db-atom args)
               nil)
             (when command (recur))))))
-  (stop [_ params app-db]
+  (stop [_ _ app-db]
     (let [kv (-> (:kv app-db)
                  (dissoc :current-city)
                  (dissoc :current-state))]

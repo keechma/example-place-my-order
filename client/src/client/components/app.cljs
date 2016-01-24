@@ -33,6 +33,7 @@
           action (:action current-route)
           c-landing (ui/component ctx :landing)
           c-restaurant-list (ui/component ctx :restaurant-list)
+          c-order-history (ui/component ctx :order-history)
           c-restaurant-detail (ui/component ctx :restaurant-detail)
           c-order (ui/component ctx :order)]
       (when-not (nil? current-route)
@@ -41,6 +42,7 @@
          (match [page slug action]
                 ["home" nil nil] [c-landing]
                 ["restaurants" nil nil] [c-restaurant-list]
+                ["order-history" nil nil] [c-order-history]
                 ["restaurants" (slug :guard !nil?) nil] [c-restaurant-detail]
                 ["restaurants" (slug :guard !nil?) "order"] [c-order]
                 :else [:h1 "Not found"])]))))
@@ -50,4 +52,5 @@
                  :component-deps [:landing
                                   :restaurant-detail
                                   :restaurant-list
-                                  :order]}))
+                                  :order
+                                  :order-history]}))
