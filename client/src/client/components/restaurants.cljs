@@ -1,42 +1,40 @@
 (ns client.components.restaurants
-  (:require [ashiba.ui-component :as ui]))
+  (:require [ashiba.ui-component :as ui]
+            [client.components.restaurant-list :refer [render-address]]))
 
-(defn render-address [address]
-  [:div.address
-   (:street address)
-   [:br]
-   (str (:city address) ", " (:state address) " " (:zip address))])
-
-(defn render-restaurant [ctx restaurant]
-  [:div.restaurant {:key (:slug restaurant)}
-   [:img {:src (get-in restaurant [:images :thumbnail])}]
-   [:h3 (:name restaurant)]
-   (render-address (:address restaurant))
-   [:div.hours-price
-    "$$$"
-    [:br]
-    "Hours: M-F 10am-11pm"
-    [:span.open-now "Open Now"]]
-   [:a.btn {:href (ui/url ctx {:page "restaurants" :slug (:slug restaurant)})}
-    "Place My Order"]
-   [:br]])
+(defn render-detail [r ctx current-route]
+  (let [r-meta (meta r)]
+    (if (:is-loading? r-meta)
+      [:div.loading]
+      [:div
+       [:div.restaurant-header
+        {:style {:background-image (str "url(/" (get-in r [:images :banner]) ")")}}
+        [:div.background
+         [:h2 (:name r)]
+         (render-address (:address r))
+         [:div.hours-price 
+          "$$$" [:br] "Hours: M-F 10am-11pm" [:span.open-now "Open Now"]]
+         [:br]]]
+       [:div.restaurant-content
+        [:h3 "The best food this side of the Mississippi"]
+        [:p.description
+         [:img {:src (get-in r [:images :owner])}]
+         (str "Description for " (:name r))]
+        [:p.order-link
+         [:a.btn {:href (ui/url ctx (merge current-route {:action "order"}))}
+          (str "Order from " (:name r))]]]])))
 
 (defn render [ctx]
-  (let [restaurants-sub (ui/subscription ctx :restaurants)]
+  (let [current-route (ui/current-route ctx)
+        current-restaurant (ui/subscription ctx :current-restaurant)]
     (fn []
-      (let [restaurants @restaurants-sub
-            restaurants-meta (meta restaurants)]
-        [:div.restaurants
-         [:h2.page-header "Restaurants"]
-         [:form.form
-          [(ui/component ctx :states)]
-          [(ui/component ctx :cities)]]
-         (if (:is-loading? restaurants-meta)
-           [:div.restaurants.loading]
-           (map (partial render-restaurant ctx) restaurants))
-         ]))))
+      (let [slug (get-in @current-route [:data :slug])]
+        [:div
+         (if (nil? slug)
+           [(ui/component ctx :restaurant-list)]
+           (render-detail @current-restaurant ctx (:data @current-route)))]))))
 
 (def component (ui/constructor
-                {:subscription-deps [:restaurants]
-                 :component-deps [:cities :states]
-                 :renderer render}))
+                {:renderer render
+                 :component-deps [:restaurant-list]
+                 :subscription-deps [:current-restaurant]}))

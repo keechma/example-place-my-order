@@ -2,11 +2,11 @@
   (:require [ashiba.controller :as controller]
             [client.edb :as edb]
             [cljs-http.client :as http]
-            [cljs.core.async :as async :refer [<!]])
+            [cljs.core.async :as async :refer [<!]]
+            [client.util :refer [unpack-req]])
   (:require-macros [cljs.core.async.macros :refer [go]]))
 
-(defn unpack-req [req]
-  [(:success req) (:body req)])
+
 
 (defn load-collection [entity list app-db-atom req]
   (do
@@ -54,9 +54,11 @@
 
 (defrecord Controller []
   controller/IController
-  (params [_ route-params]
-    (when (= (get-in route-params [:data :page]) "restaurants")
-      true))
+  (params [_ route]
+    (let [route-data (:data route)]
+      (when (and (= (:page route-data) "restaurants")
+                 (nil? (:slug route-data)))
+        true)))
   (start [this params app-db]
     (controller/execute this :load-states)
     app-db)

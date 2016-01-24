@@ -3,7 +3,7 @@
 
 (def dbal (edb/make-dbal {:states {:id :short}
                           :cities {:id :name}
-                          :restaurants {:id :_id}}))
+                          :restaurants {:id :slug}}))
 
 (defn wrap-entity-db-get [dbal-fn]
   (fn [db & rest]
