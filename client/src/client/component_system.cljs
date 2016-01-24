@@ -9,6 +9,7 @@
             [client.components.order-form :as order-form]
             [client.components.order-report :as order-report]
             [client.components.order-history :as order-history]
+            [client.components.order-list-item :as order-list-item]
             [ashiba.ui-component :as ui]
             [client.subscriptions :as subscriptions]))
 
@@ -37,4 +38,5 @@
     :order order/component
     :order-report (assoc order-report/component :topic :order)
     :order-form (assoc order-form/component :topic :order)
-    :order-history (assoc  order-history/component :topic :order-history)}))
+    :order-list-item (assoc order-list-item/component :topic :order)
+    :order-history order-history/component}))

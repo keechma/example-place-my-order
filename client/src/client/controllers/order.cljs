@@ -17,10 +17,28 @@
       (reset! app-db-atom
               (edb/insert-named-item @app-db-atom :orders :current data)))))
 
+(defn mark-order [app-db-atom [order new-status]]
+  (go
+    (let [id (:_id order)
+          marked-order (merge order {:status new-status})
+          [success body] (unpack-req (<! (http/put (str "/api/orders/" id)
+                                                   {:json-params marked-order})))]
+      (when success
+        (reset! app-db-atom
+                (edb/insert-item @app-db-atom :orders body))))))
+
+(defn delete-order [app-db-atom order]
+  (go
+    (let [id (:_id order)
+          [success body] (unpack-req (<! (http/delete (str "/api/orders/" id))))]
+      (if success
+        (reset! app-db-atom
+                (edb/remove-item @app-db-atom :orders id))))))
 (defrecord Controller []
   controller/IController
   (params [_ route]
-    (when (= (get-in route [:data :action]) "order")
+    (when (or (= (get-in route [:data :action]) "order")
+              (= (get-in route [:data :page]) "order-history"))
       true))
   (handler [this app-db-atom in-chan out-chan]
     (go (loop []
@@ -28,6 +46,8 @@
             (case command
               :save-order (save-order app-db-atom args)
               :clear-order (remove-order app-db-atom)
+              :mark-order (mark-order app-db-atom args)
+              :delete-order (delete-order app-db-atom args)
               nil)
             (when command (recur))))))
   (stop [_ _ app-db]
