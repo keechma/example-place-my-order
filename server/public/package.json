@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "place-my-order-assets": "^0.1.6",
-    "socket.io-client": "^1.4.4"
+    "place-my-order-assets": "^0.1.6"
   }
 }
