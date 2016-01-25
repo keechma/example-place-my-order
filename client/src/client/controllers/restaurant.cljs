@@ -14,7 +14,7 @@
   (update! app-db-atom
            #(edb/insert-named-item % :restaurants :current {} {:is-loading? true}))
   (go 
-    (let [req (<! (http/get (str "/api/restaurants/" slug)))
+    (let [req (<! (http/get (str "/restaurants/" slug)))
           meta {:is-loading? false}
           [success data] (unpack-req req)]
       (update! app-db-atom

@@ -33,7 +33,7 @@
                                 (edb/remove-collection :cities :list)))
         (when-not (empty? new-state)
           (load-cities app-db-atom
-                       (http/get "/api/cities" {:query-params {:state new-state}})))))))
+                       (http/get "/cities" {:query-params {:state new-state}})))))))
 
 (defn select-city [app-db-atom new-city]
   (let [app-db @app-db-atom
@@ -46,7 +46,7 @@
                                 (edb/remove-collection :restaurants :list)))
         (when-not (empty? new-city)
           (load-restaurants app-db-atom
-                            (http/get "/api/restaurants"
+                            (http/get "/restaurants"
                                       {:query-params {"address.city" new-city
                                                       "address.state" current-state}})))))))
 
@@ -64,7 +64,7 @@
     (go (loop []
           (let [[command args] (<! in-chan)]
             (case command
-              :load-states (load-states app-db-atom (http/get "/api/states"))
+              :load-states (load-states app-db-atom (http/get "/states"))
               :select-state (select-state app-db-atom args)
               :select-city (select-city app-db-atom args)
               nil)
