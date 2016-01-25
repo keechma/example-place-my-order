@@ -1,5 +1,5 @@
 (ns client.components.order-list-item
-  (:require [ashiba.ui-component :as ui]
+  (:require [keechma.ui-component :as ui]
             [client.components.order-shared :refer [menu-item-key]]))
 
 (defn mark-order [ctx order status e]

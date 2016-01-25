@@ -1,5 +1,5 @@
 (ns client.components.order
-  (:require [ashiba.ui-component :as ui]))
+  (:require [keechma.ui-component :as ui]))
 
 (defn render [ctx]
   (let [current-order-sub (ui/subscription ctx :current-order)]

@@ -1,5 +1,5 @@
 (ns client.components.landing
-  (:require [ashiba.ui-component :as ui]))
+  (:require [keechma.ui-component :as ui]))
 
 (defn render [ctx]
   [:div.pmo-home

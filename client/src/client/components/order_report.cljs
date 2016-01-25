@@ -1,5 +1,5 @@
 (ns client.components.order-report
-  (:require [ashiba.ui-component :as ui]
+  (:require [keechma.ui-component :as ui]
             [client.components.order-shared :refer [menu-item-key]]))
             
 (defn render-menu-item [item]

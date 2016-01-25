@@ -1,5 +1,5 @@
 (ns client.components.app
-  (:require [ashiba.ui-component :as ui]
+  (:require [keechma.ui-component :as ui]
             [cljs.core.match :refer-macros [match]]))
 
 (def !nil? (complement nil?))

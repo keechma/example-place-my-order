@@ -1,5 +1,5 @@
 (ns client.controllers.restaurants
-  (:require [ashiba.controller :as controller]
+  (:require [keechma.controller :as controller]
             [client.edb :as edb]
             [cljs-http.client :as http]
             [cljs.core.async :as async :refer [<!]]

@@ -1,5 +1,5 @@
 (ns client.components.cities
-  (:require [ashiba.ui-component :as ui]))
+  (:require [keechma.ui-component :as ui]))
 
 (defn render-city [city]
   [:option {:value (:name city) :key (str "city-" (:name city))} (:name city)])

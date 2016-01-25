@@ -1,5 +1,5 @@
 (ns client.components.restaurant-list
-  (:require [ashiba.ui-component :as ui]
+  (:require [keechma.ui-component :as ui]
             [client.components.restaurant-shared :refer [render-address render-hours]]))
 
 (defn render-restaurant [ctx restaurant]

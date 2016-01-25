@@ -1,5 +1,5 @@
 (ns client.edb
-  (:require [ashiba.edb :as edb]))
+  (:require [keechma.edb :as edb]))
 
 (def dbal (edb/make-dbal {:states {:id :short}
                           :cities {:id :name}

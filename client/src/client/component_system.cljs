@@ -10,7 +10,7 @@
             [client.components.order-report :as order-report]
             [client.components.order-history :as order-history]
             [client.components.order-list-item :as order-list-item]
-            [ashiba.ui-component :as ui]
+            [keechma.ui-component :as ui]
             [client.subscriptions :as subscriptions]))
 
 (defn resolve-component-subscriptions [subs component]

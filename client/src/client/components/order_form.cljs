@@ -1,5 +1,5 @@
 (ns client.components.order-form
-  (:require [ashiba.ui-component :as ui]
+  (:require [keechma.ui-component :as ui]
             [reagent.core :refer [atom]]
             [client.components.order-shared :refer [menu-item-key]]
             [clojure.set :as set]))

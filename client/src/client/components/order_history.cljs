@@ -1,5 +1,5 @@
 (ns client.components.order-history
-  (:require [ashiba.ui-component :as ui]))
+  (:require [keechma.ui-component :as ui]))
 
 (def order-statuses ["new" "preparing" "delivery" "delivered"])
 

@@ -1,5 +1,5 @@
 (ns client.controllers.order
-  (:require [ashiba.controller :as controller]
+  (:require [keechma.controller :as controller]
             [client.edb :as edb]
             [cljs-http.client :as http]
             [client.util :refer [unpack-req]]

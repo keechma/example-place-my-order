@@ -1,5 +1,5 @@
 (ns client.controllers.vacuum
-  (:require [ashiba.controller :as controller]
+  (:require [keechma.controller :as controller]
             [client.edb :as edb]
             [cljs.core.async :as async :refer [<!]])
   (:require-macros [cljs.core.async.macros :refer [go]]))

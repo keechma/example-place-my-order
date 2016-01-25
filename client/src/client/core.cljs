@@ -1,6 +1,6 @@
 (ns client.core
   (:require [client.app :as app]
-            [ashiba.app-state :as app-state]))
+            [keechma.app-state :as app-state]))
 
 (enable-console-print!)
 

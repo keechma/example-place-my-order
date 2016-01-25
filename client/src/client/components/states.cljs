@@ -1,5 +1,5 @@
 (ns client.components.states
-  (:require [ashiba.ui-component :as ui]))
+  (:require [keechma.ui-component :as ui]))
 
 (defn render-state [state]
   [:option {:value (:short state) :key (str "state-" (:short state))} (:name state)])
