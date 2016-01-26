@@ -1,5 +1,6 @@
 (ns client.app
   (:require [client.component-system :refer [system]]
+            [client.subscriptions :as subscriptions]
             [client.controllers.restaurants :as c-restaurants]
             [client.controllers.restaurant :as c-restaurant]
             [client.controllers.order :as c-order]
@@ -15,4 +16,5 @@
                                :order-history (c-order-history/->Controller)
                                :vacuum (c-vacuum/->Controller)}
                  :html-element (.getElementById js/document "app")
-                 :components system})
+                 :components system
+                 :subscriptions subscriptions/all})

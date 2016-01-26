@@ -9,26 +9,9 @@
             [client.components.order-form :as order-form]
             [client.components.order-report :as order-report]
             [client.components.order-history :as order-history]
-            [client.components.order-list-item :as order-list-item]
-            [keechma.ui-component :as ui]
-            [client.subscriptions :as subscriptions]))
+            [client.components.order-list-item :as order-list-item]))
 
-(defn resolve-component-subscriptions [subs component]
-  (reduce (fn [c dep]
-            (let [sub (get subs dep)]
-              (if (nil? sub)
-                (throw (js/Error (str "Missing subscription: " dep)))
-                (ui/resolve-subscription-dep c dep sub))))
-          component (or (:subscription-deps component) [])))
-
-(defn resolve-subscriptions [subs components]
-  (reduce-kv (fn [components k c]
-               (assoc components k (resolve-component-subscriptions subs c)))
-             {} components))
-
-(def system 
-  (resolve-subscriptions
-   subscriptions/all
+(def system
    {:main app/component
     :landing landing/component
     :cities (assoc cities/component :topic :restaurants)
@@ -39,4 +22,4 @@
     :order-report (assoc order-report/component :topic :order)
     :order-form (assoc order-form/component :topic :order)
     :order-list-item (assoc order-list-item/component :topic :order)
-    :order-history order-history/component}))
+    :order-history order-history/component})
