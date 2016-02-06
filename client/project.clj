@@ -16,7 +16,8 @@
                  [com.stuartsierra/dependency "0.2.0"]
                  [secretary "1.2.3"]
                  [cljs-http "0.1.39"]
-                 [org.clojure/core.match "0.3.0-alpha4"]] 
+                 [org.clojure/core.match "0.3.0-alpha4"]
+                 [keechma "0.1.0-SNAPSHOT"]] 
 
   :plugins [[lein-cljsbuild "1.1.2" :exclusions [[org.clojure/clojure]]]
             [lein-figwheel "0.5.0-4"]]
