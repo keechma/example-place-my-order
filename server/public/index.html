@@ -6,15 +6,11 @@
 </head>
 <body>
     <div id="app"></div>
-    <script src="/socket.io/socket.io.js">
-    </script>
-    <script src="http://localhost:3449/js/compiled/out/goog/base.js">
-    </script>
-    <script src="http://localhost:3449/js/compiled/out/cljs_deps.js">
-    </script>
-    <script type="text/javascript">
-    goog.require('figwheel.connect');
-    goog.require('client.core');
-    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>var CLOSURE_UNCOMPILED_DEFINES = null;</script>
+    <script src="http://localhost:3449/js/compiled/out/goog/base.js"></script>
+    <script src="http://localhost:3449/js/compiled/out/cljs_deps.js"></script>
+    <script>if (typeof goog != "undefined") { goog.require("figwheel.connect.dev"); }</script>
+    <script>goog.require("client.core");</script>
 </body>
 </html>

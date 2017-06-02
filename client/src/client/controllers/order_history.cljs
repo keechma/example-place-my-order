@@ -7,14 +7,14 @@
             [clojure.set :as set])
   (:require-macros [cljs.core.async.macros :refer [go]]))
 
-(defn connect-socketio [listener]
+(defn connect-socketio [ctrl]
   ;; This function listens to the websocket messages, and dispatches
   ;; them to the controllers in-chan. This way controller can react
   ;; to these messages.
   (try
     (let [conn (.io js/window)
           send (fn [command order]
-                 (put! listener [command (js->clj order :keywordize-keys true)]))]
+                 (controller/execute ctrl command (js->clj order :keywordize-keys true)))]
       (.connect conn #js {:forceNew true})
       (.on conn "orders created" #(send :order-created %))
       (.on conn "orders updated" #(send :order-updated %))
@@ -82,7 +82,7 @@
     ;;
     ;; connect-socketio function returns the function that can be
     ;; used to disconnect from the websocket.
-    (let [disconnect (connect-socketio in-chan)]
+    (let [disconnect (connect-socketio this)]
       (go (loop []
             (let [[command args] (<! in-chan)]
               (case command

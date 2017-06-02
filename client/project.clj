@@ -1,26 +1,35 @@
 (defproject client "0.1.0-SNAPSHOT"
-  :description "FIXME: write this!"
-  :url "http://example.com/FIXME"
-  :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :description "Place My Order application written in keechma"
+  :url "http://github.com/keechma/keechma-place-my-order"
+  :license {:name "MIT"}
 
-  :dependencies [[org.clojure/clojure "1.7.0"]
-                 [org.clojure/clojurescript "1.7.170"]
+  :dependencies [[org.clojure/clojure "1.9.0-alpha14"]
+                 [org.clojure/clojurescript "1.9.229"]
                  [org.clojure/core.async "0.2.374" :exclusions [[org.clojure/tools.reader]]]
-                 [reagent "0.6.0-alpha" :exclusions [cljsjs/react]]
+                 [reagent "0.6.0" :exclusions [cljsjs/react]]
                  [cljs-react-test "0.1.3-SNAPSHOT" :exclusions [cljsjs/react-with-addons]]
                  [prismatic/dommy "1.1.0"]
-                 [cljsjs/react-with-addons "0.14.3-0"]
                  [funcool/cuerdas "0.7.0"]
                  [lein-doo "0.1.6"]
                  [com.stuartsierra/dependency "0.2.0"]
-                 [secretary "1.2.3"]
                  [cljs-http "0.1.39"]
                  [org.clojure/core.match "0.3.0-alpha4"]
-                 [keechma "0.1.0-SNAPSHOT"]] 
+                 
+
+                 [cljsjs/react-with-addons "15.2.1-0"]
+                 [cljs-react-test "0.1.4-SNAPSHOT" :exclusions [cljsjs/react-with-addons]]
+                 [prismatic/dommy "1.1.0"]
+                 [funcool/cuerdas "2.0.1"]
+                 [lein-doo "0.1.7"]
+                 [com.stuartsierra/dependency "0.2.0"]
+                 [secretary "1.2.3"]
+                 [keechma/router "0.1.0"]
+                 [keechma/entitydb "0.1.0"]
+                 [com.cognitect/transit-cljs "0.8.239"]
+                 [com.taoensso/sente "1.11.0"]]
 
   :plugins [[lein-cljsbuild "1.1.2" :exclusions [[org.clojure/clojure]]]
-            [lein-figwheel "0.5.0-4"]]
+            [lein-figwheel "0.5.8"]]
 
   :source-paths ["src"]
 

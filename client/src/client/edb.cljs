@@ -1,5 +1,5 @@
 (ns client.edb
-  (:require [keechma.edb :as edb]))
+  (:require [entitydb.core :as edb]))
 
 (def dbal (edb/make-dbal {:states {:id :short}
                           :cities {:id :name}
