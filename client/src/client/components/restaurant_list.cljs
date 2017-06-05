@@ -17,6 +17,7 @@
     (fn []
       (let [restaurants @restaurants-sub
             restaurants-meta (meta restaurants)]
+
         [:div.restaurants
          [:h2.page-header "Restaurants"]
          [:form.form

@@ -1,4 +1,4 @@
-(ns client.component-system
+(ns client.ui
   (:require [client.components.app :as app]
             [client.components.landing :as landing]
             [client.components.restaurant-list :as restaurant-list]
@@ -11,7 +11,7 @@
             [client.components.order-history :as order-history]
             [client.components.order-list-item :as order-list-item]))
 
-(def system
+(def ui
    {:main app/component
     :landing landing/component
     :cities (assoc cities/component :topic :restaurants)

@@ -21,7 +21,7 @@
   [:div.pmo-header
    [:header
     [:nav
-     [:h1 "place-my-order.com"]
+     [:h1 "Place My Order"]
      [:ul
       (map (partial render-nav-link ctx current-route) pages)]]]])
 
