@@ -1,6 +1,7 @@
 (ns client.components.restaurant-list
   (:require [keechma.ui-component :as ui]
-            [client.components.restaurant-shared :refer [render-address render-hours]]))
+            [client.components.restaurant-shared :refer [render-address render-hours]]
+            [keechma.toolbox.ui :refer [sub>]]))
 
 (defn render-restaurant [ctx restaurant]
   [:div.restaurant {:key (:slug restaurant)}
@@ -13,21 +14,18 @@
    [:br]])
 
 (defn render [ctx]
-  (let [restaurants-sub (ui/subscription ctx :restaurants)]
-    (fn []
-      (let [restaurants @restaurants-sub
-            restaurants-meta (meta restaurants)]
-
-        [:div.restaurants
-         [:h2.page-header "Restaurants"]
-         [:form.form
-          [(ui/component ctx :states)]
-          [(ui/component ctx :cities)]]
-         (if (:is-loading? restaurants-meta)
-           [:div.restaurants.loading]
-           (map (partial render-restaurant ctx) restaurants))]))))
+  (let [restaurants (sub> ctx :restaurants)
+        restaurants-meta (sub> ctx :restaurants-meta)]
+    [:div.restaurants
+     [:h2.page-header "Restaurants"]
+     [:form.form
+      [(ui/component ctx :states)]
+      [(ui/component ctx :cities)]]
+     (if (= :pending (:status restaurants-meta))
+       [:div.restaurants.loading]
+       (map (partial render-restaurant ctx) restaurants))]))
 
 (def component (ui/constructor
-                {:subscription-deps [:restaurants]
+                {:subscription-deps [:restaurants :restaurants-meta]
                  :component-deps [:cities :states]
                  :renderer render}))

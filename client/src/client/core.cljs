@@ -4,7 +4,7 @@
 
 (enable-console-print!)
 
-(defonce running-app (clojure.core/atom))
+(defonce running-app (clojure.core/atom nil))
 
 (defn start-app! []
   (reset! running-app (app-state/start! app/definition)))

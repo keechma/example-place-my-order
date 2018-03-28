@@ -4,24 +4,17 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies [[org.clojure/clojure "1.9.0-alpha14"]
-                 [org.clojure/clojurescript "1.9.229"]
-                 [reagent "0.6.1"]
-                 [cljs-react-test "0.1.3-SNAPSHOT" :exclusions [cljsjs/react-with-addons]]
-                 [prismatic/dommy "1.1.0"]
-                 [cljsjs/react-with-addons "0.14.3-0"]
-                 [funcool/cuerdas "0.7.0"]
-                 [lein-doo "0.1.6"]
-                 [com.stuartsierra/dependency "0.2.0"]
-                 [secretary "1.2.3"]
-                 [cljs-http "0.1.39"]
-                 [org.clojure/core.match "0.3.0-alpha4"]
-                 [keechma "0.2.0-SNAPSHOT-11":exclusions [cljsjs/react-with-addons]]
-                 [keechma/toolbox "0.0.1-SNAPSHOT-4"]
-                 [keechma/entitydb "0.1.1"]] 
+  :dependencies [[org.clojure/clojure "1.9.0"]
+                 [org.clojure/clojurescript "1.9.946"]
+                 [reagent "0.7.0"]
+                 [org.clojure/core.match "0.3.0-alpha5"]
+                 [cljs-http "0.1.44"]
+                 [keechma "0.3.3":exclusions [cljsjs/react-with-addons]]
+                 [keechma/toolbox "0.1.10"]
+                 [keechma/entitydb "0.1.4"]] 
 
-  :plugins [[lein-cljsbuild "1.1.2" :exclusions [[org.clojure/clojure]]]
-            [lein-figwheel "0.5.8"]]
+  :plugins [[lein-cljsbuild "1.1.7"]
+            [lein-figwheel "0.5.14"]]
 
   :source-paths ["src"]
 

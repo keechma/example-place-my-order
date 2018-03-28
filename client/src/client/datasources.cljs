@@ -15,7 +15,6 @@
   ([url params]
    (ajax/GET url (merge {:keywords? true :response-format :json} params))))
 
-
 (def datasources
   {:states             {:target    [:edb/collection :states/list]
                         :processor extract-data
@@ -58,12 +57,17 @@
                                         (GET (str "/restaurants/" slug)))))))
                         :params (fn [_ {:keys [page slug]} _]
                                   (when (and slug (= "restaurants" page))
-                                    slug))}
+                                    slug))} 
 
-   :current-order      {:target [:edb/named-item :orders/current]
-                        :loader (map-loader (fn [_]))
-                        :params (fn [_ _ _])}
-
-   :order-history      {:target [:edb/collection :orders/list]
-                        :loader (map-loader (fn [_]))
-                        :params (fn [_ _ _])}})
+   :order-history      {:target [:edb/collection :orders/history]
+                        :loader (map-loader
+                                 (fn [req]
+                                   (when (:params req)
+                                     (->> (p/all [(GET "/orders" {:params {:status "new"}})
+                                                  (GET "/orders" {:params {:status "preparing"}})
+                                                  (GET "/orders" {:params {:status "delivery"}})
+                                                  (GET "/orders" {:params {:status "delivered"}})])
+                                          (p/map #(apply concat (map :data %)))))))
+                        :params (fn [_ {:keys [page]} _]
+                                  (when (= page "order-history")
+                                    true))}})

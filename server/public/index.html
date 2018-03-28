@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Place my order</title>
-    <link rel="stylesheet" href="/css/app.css">
+  <title>Place my order</title>
+  <link rel="stylesheet" href="/css/app.css">
 </head>
+
 <body>
-    <div id="app"></div>
-    <script src="/socket.io/socket.io.js">
-    </script>
-    <script src="http://localhost:3449/js/compiled/out/goog/base.js">
-    </script>
-    <script src="http://localhost:3449/js/compiled/out/cljs_deps.js">
-    </script>
-    <script type="text/javascript">
-    goog.require('figwheel.connect');
-    goog.require('client.core');
-    </script>
+  <div id="app"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>var CLOSURE_UNCOMPILED_DEFINES = {};
+    var CLOSURE_NO_DEPS = true;</script>
+  <script src="http://localhost:3449/js/compiled/out/goog/base.js"></script>
+  <script src="http://localhost:3449/js/compiled/out/goog/deps.js"></script>
+  <script src="http://localhost:3449/js/compiled/out/cljs_deps.js"></script>
+  <script>if (typeof goog == "undefined") console.warn("ClojureScript could not load :main, did you forget to specify :asset-path?");</script>
+  <script>goog.require("process.env");</script>
+  <script>if (typeof goog != "undefined") { goog.require("figwheel.connect.build_dev"); }</script>
+  <script>goog.require("client.core");</script>
 </body>
+
 </html>
