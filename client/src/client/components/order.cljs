@@ -1,12 +1,11 @@
 (ns client.components.order
-  (:require [keechma.ui-component :as ui]))
+  (:require [keechma.ui-component :as ui]
+            [keechma.toolbox.ui :refer [sub>]]))
 
 (defn render [ctx]
-  (let [current-order-sub (ui/subscription ctx :current-order)]
-    (fn []
-      (let [current-order @current-order-sub
-            component (if current-order :order-report :order-form)]
-        [(ui/component ctx component)]))))
+  (let [current-order (sub> ctx :current-order)
+        component (if current-order :order-report :order-form)]
+    [(ui/component ctx component)]))
 
 (def component (ui/constructor
                 {:component-deps [:order-form :order-report]

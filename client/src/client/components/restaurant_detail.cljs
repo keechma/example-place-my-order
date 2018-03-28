@@ -1,6 +1,7 @@
 (ns client.components.restaurant-detail
   (:require [keechma.ui-component :as ui]
-            [client.components.restaurant-shared :refer [render-address render-hours]]))
+            [client.components.restaurant-shared :refer [render-address render-hours]]
+            [keechma.toolbox.ui :refer [sub> route>]]))
 
 (defn render-header [r]
   [:div.restaurant-header
@@ -25,10 +26,10 @@
   (let [current-route-sub (ui/current-route ctx)
         current-restaurant-sub (ui/subscription ctx :current-restaurant)]
     (fn []
-      (let [r @current-restaurant-sub
-            r-meta (meta r)
-            current-route (:data @current-route-sub)]
-        (if (:is-loading? r-meta)
+      (let [r (sub> ctx :current-restaurant)
+            r-meta (sub> ctx :current-restaurant-meta)
+            current-route (route> ctx)]
+        (if (= :pending (:status r-meta))
           [:div.loading]
           [:div
            (render-header r)
@@ -36,4 +37,5 @@
 
 (def component (ui/constructor
                 {:renderer render
-                 :subscription-deps [:current-restaurant]}))
+                 :subscription-deps [:current-restaurant
+                                     :current-restaurant-meta]}))

@@ -1,23 +1,31 @@
 (ns client.components.cities
-  (:require [keechma.ui-component :as ui]))
+  (:require [keechma.ui-component :as ui]
+            [keechma.toolbox.ui :refer [route> sub> <cmd]]))
+
+(defn update-url [ctx city]
+  (let [current-route (route> ctx)]
+    (if (seq city)
+      (ui/redirect ctx (assoc current-route :city city))
+      (ui/redirect ctx (dissoc current-route :city)))))
 
 (defn render-city [city]
-  [:option {:value (:name city) :key (str "city-" (:name city))} (:name city)])
+  [:option {:value (:name city) :key (:name city)} (:name city)])
 
 (defn render [ctx]
-  (let [cities-sub (ui/subscription ctx :cities)]
-    (fn []
-      (let [cities @cities-sub
-            cities-meta (meta cities)
-            select-city #(ui/send-command ctx :select-city (.. % -target -value))]
-        [:div.form-group
-         [:label "City"]
-         [:select {:disabled (or (empty? cities) (:is-loading? cities-meta))
-                   :on-change select-city}
-          (if (:is-loading? cities-meta)
-            [:option "Loading"]
-            (map render-city (into [{:name "Choose a city"}] cities)))]]))))
+  (let [cities (into [{:name "Choose a city" :short ""}] (sub> ctx :cities))
+        current-route (route> ctx)
+        cities-meta (sub> ctx :cities-meta)]
+    [:div.form-group
+     [:label "City"]
+     [:select
+      {:disabled (= 1 (count cities))
+       :value (or (:city current-route) "")
+       :on-change #(update-url ctx (.. % -target -value))}
+      (if (= :pending (:status cities-meta))
+        [:option "Loading"]
+        (doall
+         (map render-city cities)))]]))
 
 (def component (ui/constructor
-                {:subscription-deps [:cities]
+                {:subscription-deps [:cities :cities-meta]
                  :renderer render}))

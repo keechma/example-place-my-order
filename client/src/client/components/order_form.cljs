@@ -2,7 +2,8 @@
   (:require [keechma.ui-component :as ui]
             [reagent.core :refer [atom]]
             [client.components.order-shared :refer [menu-item-key]]
-            [clojure.set :as set]))
+            [clojure.set :as set]
+            [keechma.toolbox.ui :refer [sub>]]))
 
 (def tabs {:lunch "Lunch menu"
            :dinner "Dinner menu"})
@@ -95,13 +96,12 @@
    (render-info order-atom)])
 
 (defn render [ctx]
-  (let [current-restaurant-sub (ui/subscription ctx :current-restaurant)
-        order-atom (atom {:status "new"
+  (let [order-atom (atom {:status "new"
                           :items (set nil)})
         missing-atom (atom (set nil))
         current-tab-atom (atom :lunch)]
     (fn []
-      (let [r @current-restaurant-sub
+      (let [r (sub> ctx :current-restaurant)
             r-meta (meta r)]
         [:div.order-form
          (if (:is-loading? r-meta)

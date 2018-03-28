@@ -35,8 +35,7 @@
 (defn render [ctx o]
   (let [items (:items o)
         total (.toFixed (reduce #(+ %1 (:price %2)) 0 items) 2)
-        status (:status o)
-        ]
+        status (:status o)]
     [:div {:class (str "order " status) :key (:_id o)}
      [:address (:name o) [:br] (:address o) [:br] (:phone o)]
      [:div.items>ul (map render-menu-item items)]
