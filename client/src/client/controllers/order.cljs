@@ -1,6 +1,5 @@
 (ns client.controllers.order
   (:require [client.edb :as edb]
-            [client.util :refer [unpack-req]]
             [promesa.core :as p]
             [keechma.toolbox.ajax :refer [POST PUT DELETE]]
             [keechma.toolbox.pipeline.core :as pp :refer-macros [pipeline!]]

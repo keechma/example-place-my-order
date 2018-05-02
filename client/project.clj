@@ -9,9 +9,8 @@
                  [reagent "0.7.0"]
                  [org.clojure/core.match "0.3.0-alpha5"]
                  [cljs-http "0.1.44"]
-                 [keechma "0.3.3":exclusions [cljsjs/react-with-addons]]
-                 [keechma/toolbox "0.1.10"]
-                 [keechma/entitydb "0.1.4"]] 
+                 [keechma "0.3.6":exclusions [cljsjs/react-with-addons]]
+                 [keechma/toolbox "0.1.13"]] 
 
   :plugins [[lein-cljsbuild "1.1.7"]
             [lein-figwheel "0.5.14"]]

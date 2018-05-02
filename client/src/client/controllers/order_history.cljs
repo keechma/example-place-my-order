@@ -3,7 +3,6 @@
             [client.edb :as edb]
             [cljs-http.client :as http]
             [cljs.core.async :as async :refer [<! put!]]
-            [client.util :refer [unpack-req]]
             [clojure.set :as set])
   (:require-macros [cljs.core.async.macros :refer [go-loop]]))
 
